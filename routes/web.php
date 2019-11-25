@@ -119,11 +119,14 @@ Route::group(['middleware' => ['Login']], function () {
     Route::any('/classDel','Kecheng\ClassController@classDel');//课程删除
     Route::any('/classUpd','Kecheng\ClassController@classUpd');//课程修改
     Route::any('/classUpddo','Kecheng\ClassController@classUpddo');//课程修改
+    Route::any('/class_comment','Kecheng\ClassController@class_comment');//课程评论
+    Route::any('/class_catelog','Kecheng\ClassController@class_catelog');//课程章节
+    Route::any('/class_job','Kecheng\ClassController@class_job');//课程作业
+
 
     //评论
     Route::any('/commentList','Comment\CommentController@commentList');//评论展示
     Route::any('/commentDel','Comment\CommentController@commentDel');//评论删除
-    //Route::any('/class_comment','course\ClassController@class_comment');//课程评论
 
     //课程分类
     Route::any('/categoryAdd', 'category\CategoryController@categoryAdd');
