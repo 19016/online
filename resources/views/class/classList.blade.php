@@ -2,94 +2,82 @@
 
 @section('title', '后台首页')
 
-
 @section('content')
-    <div class="col-lg-12 stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">课程展示</h4>
 
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>
-                            课程id
-                        </th>
-                        <th>
-                            课程名称
-                        </th>
-                        <th>
-                            讲师名称
-                        </th>
-                        <th>
-                            分类名称
-                        </th>
-                        <th>
-                            课程状态
-                        </th>
-                        <th>
-                            价钱(是否免费)
-                        </th>
-                        <th>
-                            课程时长
-                        </th>
-                        <th>
-                            课程介绍
-                        </th>
-                        <th>
-                            课程视频或课程图片
-                        </th>
-                        <th>
-                            操作
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($class_select as $k=>$v)
-                        <tr class="table-info">
-                            <td>
-                                {{$v['course_id']}}
-                            </td>
-                            <td>
-                                {{$v['course_name']}}
-                            </td>
-                            <td>
-                                {{$v['lect_name']}}
-                            </td>
-                            <td>
-                               {{$v['cate_name']}}
-                            </td>
-                            <td>
-                                {{$v['status']}}
-                            </td>
-                            <td>
-                                @if($v['is_free']==1)
-                                       免费
-                                    @elseif($v['is_free']==2)
-                                        {{$v['price']}}
-                                @endif
-                            </td>
-                            <td>
-                                {{$v['jieshao']}}
-                            </td>
-                            <td>
-                                {{$v['course_hour']}}
-                            </td>
-                            <td>
-                                <video src="{{$v['course_page']}}" style="width: 50px;height: 50px;"></video>
-                            </td>
 
-                            <td>
-                                <a href="/classDel?id={{$v['course_id']}}">删除</a>
-                                <a href="/classUpd?id={{$v['course_id']}}">修改</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
+
+    <h2>课程列表</h2>
+    <table class="table-bordered table table-striped table-condensed">
+        <tr align="center">
+            <td>课程id</td>
+            <td>课程名称</td>
+            <td>讲师名称</td>
+            <td>分类名称</td>
+            <td>课程状态</td>
+            <td>价钱（是否免费）</td>
+            <td>课程时长</td>
+            <td>课程介绍</td>
+            <td>课程图片</td>
+            <td>操作</td>
+        </tr>
+        @foreach($class_select as$k => $v)
+            <tr align="center">
+                <td>
+                    {{$v['course_id']}}
+                </td>
+                <td>
+                    {{$v['course_name']}}
+                </td>
+                <td>
+                    {{$v['lect_name']}}
+                </td>
+                <td>
+                    {{$v['cate_name']}}
+                </td>
+                <td>
+                    @if($v['status']==1)
+                        未开始
+                    @elseif($v['status']==2)
+                        连载中
+                    @elseif($v['status']==3)
+                        已完结
+                    @endif
+                </td>
+                <td>
+                    @if($v['is_free']==1)
+                        免费
+                    @elseif($v['is_free']==2)
+                        ￥{{$v['price']}}
+                    @endif
+                </td>
+                <td>
+                    {{$v['course_hour']}}
+                </td>
+                <td>
+                    {{$v['jieshao']}}
+                </td>
+                <td>
+                    <img src="{{$v['course_page']}}" alt="">
+                </td>
+
+                <td>
+                    @if($v['is_del']==1)
+                        已经删除
+                    @elseif($v['is_del']==0)
+                        <a href="/classDel?id={{$v['course_id']}}">删除</a>
+                    @endif
+                    <a href="/classUpd?id={{$v['course_id']}}">修改</a>
+                    <a href="/class_comment?id={{$v['course_id']}}">评论</a>
+                    <a href="/class_catelog?id={{$v['course_id']}}">章节</a>
+                    <a href="/class_job?id={{$v['course_id']}}">作业</a>
+                </td>
+
+            </tr>
+        @endforeach
+        {{--<tr>--}}
+        {{--<td colspan="3"> {{$data->links()}}</td>--}}
+        {{--</tr>--}}
+    </table>
+
+    <a href="{{url('categoryAdd')}}" class="btn btn-primary">添加分类</a>
 @endsection

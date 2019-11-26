@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Kecheng;
 
+use App\model\Catalog;
 use App\Model\Category;
 use App\Model\Course;
+use App\Model\Comment;
+use App\model\Job;
 use App\Model\Lect;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -198,8 +201,7 @@ class ClassController extends Controller
 
     }
 
-
-    /** 课程跳转 */
+    /** 课程评论跳转 */
     public function class_comment(){
         $course_id=$_GET['id'];
         //根据课程id查询pinglun
@@ -210,6 +212,32 @@ class ClassController extends Controller
             ->get()
             ->toArray();
         return view('class.class_comment',['comment'=>$comment]);
+    }
+
+    /** 课程章节跳转 */
+    public function class_catelog(){
+        $course_id=$_GET['id'];
+        //根据课程id查询pinglun
+        $where = [
+            'course_id'=>$course_id
+        ];
+        $catalog =Catalog::where($where)
+            ->get()
+            ->toArray();
+        return view('class.class_catelog',['catalog'=>$catalog]);
+    }
+
+    /** 课程作业 */
+    public function class_job(){
+        $course_id=$_GET['id'];
+        //根据课程id查询pinglun
+        $where = [
+            'course_id'=>$course_id
+        ];
+        $job =Job::where($where)
+            ->get()
+            ->toArray();
+        return view('class.class_job',['job'=>$job]);
     }
 
 

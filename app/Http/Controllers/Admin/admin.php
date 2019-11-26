@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
-
+use App\Model\Users;
 class admin extends Controller
 {
 
@@ -29,6 +29,7 @@ class admin extends Controller
         $data = $request->input();
     //    dd($data);
         $admin = DB::table('admin')->where('admin_name','=',$data['u_name'])->first();
+        //dd($admin);
         if (!$admin){
             return json_encode(['code'=>'201','msg'=>'用户名输入错误, 请重新输入']);
         }
@@ -37,7 +38,7 @@ class admin extends Controller
         if(!$admin){
             return json_encode(['code'=>'202','msg'=>'密码输入错误, 请重新输入']);
         }
-//        dd($admin);
+   //     dd($admin);
         $request->session()->flush();
         $request->session()->put('admin', $admin);
         $admin_roel = DB::table('admin_role')->where('admin_id',$admin->admin_id)->first();
@@ -45,7 +46,7 @@ class admin extends Controller
             dd('只有查看权限');
         }
         $quanxian = DB::table('role_right')->join('right','role_right.right_id','=','right.right_id')->where('role_right.role_id',$admin_roel->role_id)->get()->toArray();
-    //    dd($quanxian);
+//        dd($quanxian);
         if($quanxian){
             $sess_id = $admin->admin_name.$admin->admin_id;
             $request->session()->put("$sess_id", $quanxian);
@@ -341,6 +342,14 @@ class admin extends Controller
 //             echo "<script>alert('删除失败');location='/lecturerIndex'</script>";die;
 //         }
 //     }
+
+    public function userlect()
+    {
+        $data=Users::join('user_info','user.u_id','=','user_info.u_id')->where('user_info.user_lect',2)->get();
+    //        dd($data);
+        return view('admin.userlect',['data'=>$data]);
+    }
+
     //退出
     public function quit(){
         request()->session()->forget('admin');

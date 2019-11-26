@@ -29,9 +29,6 @@ Route::get('/quit', 'admin\admin@quit');
  * 操作
  */
 
-
-
-
 Route::group(['middleware' => ['Login']], function () {
     //登录中间件
     Route::get('/loy', 'admin\admin@loy');
@@ -68,17 +65,27 @@ Route::group(['middleware' => ['Login']], function () {
     //用户添加
     Route::any('/userAdd', 'User\UserController@userAdd');
     Route::any('/userAddo', 'User\UserController@userAddo');
-
-
     //用户详情添加
     Route::any('/userCreate', 'User\UserController@userCreate');
     Route::any('/userSave', 'User\UserController@userSave');
-
-
     //用户列表
     Route::any('/userList', 'User\UserController@userList');
     //用户详情页
     Route::any('/userIndex', 'User\UserController@userIndex');
+//    //用户的收藏
+    Route::any('/userFavorite', 'User\UserController@userFavorite');
+    //用户升级为讲师
+    Route::any('/userLect', 'User\UserController@userLect');
+    //用户的订单详情
+    Route::any('/userOrder', 'User\UserController@userOrder');
+    //用户禁用
+    Route::any('/useron', 'User\UserController@useron');
+
+    //讲师切换用户
+    Route::any('/userlect', 'admin\admin@userlect');
+    Route::any('/userlects', 'User\UserController@userlects');
+    Route::any('/userlectd', 'User\UserController@userlectd');
+
 
     //讲师操作
     //讲师添加
@@ -91,6 +98,10 @@ Route::group(['middleware' => ['Login']], function () {
     Route::any('lectUpddo',"Lect\LectController@lectUpddo");
     //讲师删除
     Route::any('lectDel/{id}',"Lect\LectController@lectDel");
+    //讲师课程
+    Route::any('lectClass/{id}',"Lect\LectController@lectClass");
+    //讲师收益
+    Route::any('lectprofit/{id}',"Lect\LectController@lectprofit");
 
     Route::post('role_right', 'admin\admin@role_right');
 
@@ -119,6 +130,9 @@ Route::group(['middleware' => ['Login']], function () {
     Route::any('/classDel','Kecheng\ClassController@classDel');//课程删除
     Route::any('/classUpd','Kecheng\ClassController@classUpd');//课程修改
     Route::any('/classUpddo','Kecheng\ClassController@classUpddo');//课程修改
+    Route::any('/class_comment','Kecheng\ClassController@class_comment');//课程评论
+    Route::any('/class_catelog','Kecheng\ClassController@class_catelog');//课程章节
+    Route::any('/class_job','Kecheng\ClassController@class_job');//课程作业
 
     //评论
     Route::any('/commentList','Comment\CommentController@commentList');//评论展示
@@ -208,6 +222,14 @@ Route::group(['middleware' => ['Login']], function () {
     Route::any('/nav_del','Navigation\NavController@Nav_Del');//导航栏删除
     Route::any('/nav_update','Navigation\NavController@Nav_Update');//导航栏删除
     Route::any('/nav_update_do','Navigation\NavController@Nav_Update_Do');//导航栏修改
+    
+    //活动
+    Route::any('/activityAdd','Activity\ActivityController@activityAdd');//活动添加页面
+    Route::any('/activityAdddo','Activity\ActivityController@activityAdddo');//活动添加执行页面
+    Route::any('/activityList','Activity\ActivityController@activityList');//活动展示页面
+    Route::any('/activityDel','Activity\ActivityController@activityDel');//活动删除页面
+    Route::any('/activityUpd','Activity\ActivityController@activityUpd');//活动修改页面
+    Route::any('/activityUpddo','Activity\ActivityController@activityUpddo');//活动修改执行页面
 });
 
 

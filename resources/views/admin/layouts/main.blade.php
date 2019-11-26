@@ -365,6 +365,19 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#gesdefsa" aria-expanded="false" aria-controls="general-pages">
+                        <span class="menu-title">活动管理</span>
+                        <i class="menu-arrow"></i>
+                        <i class="mdi mdi-medical-bag menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="gesdefsa">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="/activityAdd"> 活动添加 </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="/activityList"> 活动展示 </a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#gerer" aria-expanded="false" aria-controls="general-pages">
                         <span class="menu-title">订单管理</span>
                         <i class="menu-arrow"></i>

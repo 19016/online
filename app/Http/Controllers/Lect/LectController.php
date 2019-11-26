@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Lect;
 
 use Illuminate\Http\Request;
 use App\Model\Lect;
+use App\Model\Profit;
 use App\Http\Controllers\Controller;
 
 class LectController extends Controller
@@ -47,5 +48,33 @@ class LectController extends Controller
         } else {
             echo "<script>alert('删除失败');location.href='/lectList'</script>";
         }
+    }
+    public function lectClass(Request $request){
+        $id=$request->id;
+        $where=[
+            'lect.lect_id'=>$id,
+            'course.is_del'=>0
+        ];
+        $data=Lect::
+        join('course','lect.lect_id','=','course.lect_id')
+        ->where($where)
+        ->get()
+        ->toArray();
+        // dd($data);
+        return view('lect.lectClass',['data'=>$data]);
+    }
+    public function lectprofit(Request $request){
+        $id=$request->id;
+        // dd($id);
+        $where=[
+            'profit.lect_id'=>$id,
+            'lect.is_del'=>0
+        ];
+        $data=Profit::
+        join('lect','lect.lect_id','=','profit.lect_id')
+        ->where($where)
+        ->get()
+        ->toArray();
+        return view('lect.lectprofit',['data'=>$data]);
     }
 }

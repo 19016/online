@@ -53,11 +53,11 @@
                 <td>  {{date("Y-m-d H:i:s",$v['order_time'])}}</td>
 
                 @if($v['pay_status']==1)
-                    <td>  {{date("Y-m-d H:i:s",$v['ass_time'])}}</td>
+                    <td>  {{date("Y-m-d H:i:s",$v['pay_time'])}}</td>
                 @elseif($v['pay_status']==2)
-                    <td>  {{date("Y-m-d H:i:s",$v['ass_time'])}}</td>
+                    <td>  {{date("Y-m-d H:i:s",$v['pay_time'])}}</td>
                 @elseif($v['pay_status']==3)
-                    <td>  {{date("Y-m-d H:i:s",$v['ass_time'])}}</td>
+                    <td>  {{date("Y-m-d H:i:s",$v['pay_time'])}}</td>
                 @elseif($v['pay_status']==4)
                     <td> 该商品未支付</td>
                 @elseif($v['pay_status']==5)
@@ -70,5 +70,6 @@
         </tr>
     </table>
 
-    <!-- <a href="{{url('/category/create')}}" class="btn btn-primary">添加菜单</a> -->
+
+
     @endsection
