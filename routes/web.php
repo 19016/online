@@ -191,8 +191,10 @@ Route::group(['middleware' => ['Login']], function () {
     Route::any('/bank_update','Bank\BankController@bank_update');//题库修改页面
     Route::any('/bank_update_do','Bank\BankController@bank_update_do');//题库修改页面
 
+  
     //订单模块
     Route::any('/order_list', 'order\OrderController@order_list');
+    Route::any('/order_info', 'order\OrderController@order_info');
 
     //轮播图
     //轮播图展示
